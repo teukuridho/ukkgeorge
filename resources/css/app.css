@@ -1,0 +1,20 @@
+/*  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.button {
+    border-radius: 60px;
+    font-family: 'Inter';
+    padding: 10px 30px;
+    cursor: pointer;
+    user-select: none !important;
+}
+
+.primary-button {
+    background-color: #007AFFB2;
+    color: white;
+}
+
+.secondary-button {
+    background-color: #FFFFFFB2;
+    color: black;
+}
