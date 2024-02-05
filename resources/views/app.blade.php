@@ -1,4 +1,4 @@
-@php($page['url'] = App::make('request')->getRequestUri())
+{{-- @php($page['url'] = App::make('request')->getRequestUri()) --}}
 <!DOCTYPE html>
 <html>
   <head>

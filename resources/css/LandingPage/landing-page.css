@@ -7,8 +7,6 @@ html {
 
 /*  */
 html, body { 
-    /* width:100%; */
-    /* height: 100%; */
     padding: 0;
     margin: 0 !important;
 }
@@ -32,6 +30,9 @@ body {
     background-size: cover;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 0px 102px 43px rgba(0,0,0,0.75) inset;
+    -webkit-box-shadow: 0px 0px 102px 43px rgba(0,0,0,0.75) inset;
+    -moz-box-shadow: 0px 0px 102px 43px rgba(0,0,0,0.75) inset;
 }
 
 /*  */
@@ -39,13 +40,6 @@ body {
     .landing-page-container {
         padding: 10px 80px;
     }   
-}
-
-/*  */
-.minimal-shadow {
-    box-shadow: 0px 0px 102px 43px rgba(0,0,0,0.75) inset;
-    -webkit-box-shadow: 0px 0px 102px 43px rgba(0,0,0,0.75) inset;
-    -moz-box-shadow: 0px 0px 102px 43px rgba(0,0,0,0.75) inset;
 }
 
 /*  */

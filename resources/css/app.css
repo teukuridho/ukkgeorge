@@ -1,5 +1,13 @@
-/*  */
+/* Inter font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* imports Roboto Mono font; for title */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+
+a {
+    text-decoration: none;
+    color: unset;
+}
 
 .button {
     border-radius: 60px;
@@ -10,11 +18,35 @@
 }
 
 .primary-button {
-    background-color: #007AFFB2;
+    display: flex;
+    justify-content: center;
+    background-color: #007AFF;
     color: white;
 }
 
 .secondary-button {
-    background-color: #FFFFFFB2;
+    display: flex;
+    justify-content: center;
+    background-color: #FFFFFF;
     color: black;
+}
+
+.title {
+    font-size: 55px;
+    /* line-height: 1 !important; */
+    color: white;
+    font-family: 'Roboto Mono';
+}
+
+.text, .small-text {
+    font-family: 'Inter';
+}
+
+.small-text {
+    font-size: 20px;
+}
+
+.link {
+    color: #007AFF;
+    text-decoration: underline;
 }

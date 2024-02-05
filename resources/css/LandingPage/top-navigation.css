@@ -1,6 +1,3 @@
-/* imports Roboto Mono font; for title */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
-
 .top-navigation {
     display: flex;
     flex-direction: column;
@@ -13,13 +10,6 @@
         flex-direction: row;
         justify-content: space-between;
     }   
-}
-
-.title {
-    font-size: 55px;
-    /* line-height: 1 !important; */
-    color: white;
-    font-family: 'Roboto Mono';
 }
 
 .top-navigation-buttons {

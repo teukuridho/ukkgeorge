@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,4 +16,9 @@ use Inertia\Inertia;
 |
 */
 
+// Homes
 Route::get('/', [HomeController::class, "index"]);
+
+// Auths
+Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
+Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
