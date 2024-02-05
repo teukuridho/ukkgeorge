@@ -1,0 +1,27 @@
+{
+  "../resources/css/app.css": {
+    "file": "assets/app-e2l3AUmy.css",
+    "isEntry": true,
+    "src": "../resources/css/app.css"
+  },
+  "../resources/images/background.jpg": {
+    "file": "assets/background-ozx5eHGA.jpg",
+    "src": "../resources/images/background.jpg"
+  },
+  "../resources/images/search.svg": {
+    "file": "assets/search-7soMzQnH.svg",
+    "src": "../resources/images/search.svg"
+  },
+  "../resources/js/app.jsx": {
+    "assets": [
+      "assets/search-7soMzQnH.svg",
+      "assets/background-ozx5eHGA.jpg"
+    ],
+    "css": [
+      "assets/app-kFaXQIrX.css"
+    ],
+    "file": "assets/app-RhwSNY-P.js",
+    "isEntry": true,
+    "src": "../resources/js/app.jsx"
+  }
+}

@@ -8,9 +8,13 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    resolve: {
-        alias: {
-            '@': '/resources/js',
-        },
-    },
+    base: '/ukkgeorge/public/build',
+    build: {
+
+    }
+    // resolve: {
+    //     alias: {
+    //         // '@': '/resources/js',
+    //     },
+    // },
 });
