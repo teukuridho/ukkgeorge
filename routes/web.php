@@ -22,3 +22,7 @@ Route::get('/', [HomeController::class, "index"]);
 // Auths
 Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
 Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
+
+Route::get('ajg', function () {
+    echo "ajg";
+});
