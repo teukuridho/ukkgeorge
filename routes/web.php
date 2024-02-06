@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +17,11 @@ use Inertia\Inertia;
 */
 
 // Homes
-Route::get('/', [HomeController::class, "index"]);
+Route::get('/', [LandingController::class, "index"])->name('home');
 
 // Auths
 Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
 Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
 
-Route::get('ajg', function () {
-    echo "ajg";
-});
+// Book
+Route::get('book/books/', [BookController::class, "books"])->name('book.books');

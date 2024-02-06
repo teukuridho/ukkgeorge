@@ -10,5 +10,6 @@ Cara menjalankan
 1. Jalankan di CLI `cp .env.example .env`, pastikan var "APP_URL" dan "VITE_BASE" benar
 2. Jalankan di CLI `composer install`
 3. Jalankan di CLI `npm install`
-4. Jalankan di CLI `npm run build`
-5. Buka situs
+4. Jalankan di CLI `node changeVendorInertia.js`
+5. Jalankan di CLI `npm run build`
+6. Buka situs

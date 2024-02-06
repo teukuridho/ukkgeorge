@@ -1,6 +1,6 @@
 import React from "react";
 import AuthPageLayout from "./Layouts/AuthPageLayout";
-import SiteTitle from "../Components/Shared/Title";
+import SiteTitle from "../Components/Shared/SiteTitle";
 import AuthTextInput from "../Components/AuthPage/AuthTextInput";
 import AuthPasswordInput from "../Components/AuthPage/AuthPasswordInput";
 import PrimaryButton from "../Components/Shared/PrimaryButton";
@@ -26,7 +26,7 @@ export default function LoginPage() {
         <div style={{
             marginTop: "10px"
         }}>
-            <p style={{color: 'white', textAlign: 'center'}} className="small-text">Belum punya akun? <Link href="sign-up"><span className="link">Daftar</span></Link></p>
+            <p style={{color: 'white', textAlign: 'center'}} className="small-text">Belum punya akun? <Link replace href="sign-up"><span className="link">Daftar</span></Link></p>
         </div>
         <div style={{
             display: 'flex',

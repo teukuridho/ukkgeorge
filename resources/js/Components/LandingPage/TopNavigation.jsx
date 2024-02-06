@@ -2,7 +2,7 @@ import '../../../css/LandingPage/top-navigation.css'
 import React from 'react'
 import SecondaryButton from '../Shared/SecondaryButton'
 import PrimaryButton from '../Shared/PrimaryButton'
-import SiteTitle from '../Shared/Title'
+import SiteTitle from '../Shared/SiteTitle'
 export default function TopNavigation() {
     return (
         <div className="top-navigation" style={{background: ''}}>
