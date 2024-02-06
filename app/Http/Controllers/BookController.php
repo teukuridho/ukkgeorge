@@ -12,6 +12,6 @@ class BookController extends Controller
     }
 
     public function bookDetails() {
-
+        return Inertia::render('BookDetailsPage');
     }
 }

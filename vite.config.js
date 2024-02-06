@@ -13,6 +13,10 @@ export default defineConfig(({mode}) => {
                 refresh: true,
             }),
         ],
+        build: {
+            cssCodeSplit: true,
+            lib: false
+        },
         base: mode == "production" ? env.VITE_BASE + "/build" : null,
     }
 });

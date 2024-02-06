@@ -25,3 +25,4 @@ Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.regist
 
 // Book
 Route::get('book/books/', [BookController::class, "books"])->name('book.books');
+Route::get('book/details/', [BookController::class, "bookDetails"])->name('book.details');
