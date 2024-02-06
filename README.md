@@ -8,7 +8,7 @@ Syarat-syarat
 
 Cara menjalankan
 1. Jalankan di CLI `cp .env.example .env`
-2. Buka file .env, pastikan var "APP_URL" dan "VITE_BASE" benar
+2. Buka file `.env`, pastikan var "APP_URL" dan "VITE_BASE" benar
 3. Jalankan di CLI `composer install`
 4. Jalankan di CLI `npm install`
 5. Jalankan di CLI `node changeVendorInertia.js`
