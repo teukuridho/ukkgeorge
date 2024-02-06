@@ -3,7 +3,7 @@ import LandingPageLayout from './Layouts/LandingPageLayout'
 import TopNavigation from '../Components/LandingPage/TopNavigation';
 import BookSearchBar from '../Components/LandingPage/BookSearchBar';
 import BookSearchButton from '../Components/LandingPage/BookSearchButton';
-import BookBrowseButton from '../Components/LandingPage/BookBrowseButton';
+import PrimaryButton from '../Components/Shared/PrimaryButton';
 
 export default function LandingPage() {
     return (
@@ -14,7 +14,7 @@ export default function LandingPage() {
                     <BookSearchBar/>
                     <BookSearchButton/>
                 </div>
-                <BookBrowseButton/>
+                <PrimaryButton link="book/books" text="Browse"/>
             </div>
         </LandingPageLayout>
     )

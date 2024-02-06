@@ -9,7 +9,7 @@ export default function TopNavigation() {
             <SiteTitle/>
             <div className='top-navigation-buttons'>
                 <SecondaryButton text="Home"/>
-                <SecondaryButton text="Category"/>
+                <SecondaryButton link="book/books" text="Books"/>
                 <SecondaryButton link="auth/sign-in" text="Sign In"/>
                 <PrimaryButton link="auth/sign-up" text="Sign Up"/>
             </div>
