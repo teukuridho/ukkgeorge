@@ -88,7 +88,7 @@ export default function HamburgerMenu({sidebar: sideBar, topBar, children}) {
                 </div>
                 <div className="w-full h-full flex flex-col">
                     <div className={`
-                        h-10 sm:h-14 w-ful mx-5 sm:mx-10 top-bar
+                        h-14 w-ful mx-5 sm:mx-10 top-bar
                         ${
                             isMobile ?
                                 showSideBar ?
