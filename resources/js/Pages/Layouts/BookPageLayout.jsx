@@ -1,5 +1,6 @@
 import React from "react";
 import SiteTitle from "../../Components/Shared/SiteTitle";
+import UserButton from "../../Components/Shared/UserButton";
 export default function BookPageLayout({children}) {
     return (
         <div className="bg-white h-full py-3 sm:py-7 px-10 sm:px-14">
@@ -14,7 +15,7 @@ export default function BookPageLayout({children}) {
                             <SiteTitle className="!text-black !text-start"/>
                         </div>
                         <div className="grow font-light text-end">
-                            Not Logged In
+                            <UserButton/>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LandingController;
@@ -26,3 +27,6 @@ Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.regist
 // Book
 Route::get('book/books/', [BookController::class, "books"])->name('book.books');
 Route::get('book/details/', [BookController::class, "bookDetails"])->name('book.details');
+
+// Admin
+Route::get('admin/books', [AdminController::class, "books"])->name('admin.books');

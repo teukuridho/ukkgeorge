@@ -61,6 +61,12 @@ a {
     text-decoration: underline;
 }
 
-.book {
+.top-bar {
+    /* box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.75); */
+}
+
+.sidebar {
     box-shadow: 3px 3px 4px 0px #A6A6A640;
 }
