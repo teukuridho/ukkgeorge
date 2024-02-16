@@ -8,10 +8,10 @@ use Inertia\Inertia;
 class AuthController extends Controller
 {
     public function signIn() {
-        return Inertia::render('LoginPage');
+        return Inertia::render('Auth/LoginPage');
     }
 
     public function signUp() {
-        return Inertia::render('RegisterPage');
+        return Inertia::render('Auth/RegisterPage');
     }
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import LandingPageLayout from './Layouts/LandingPageLayout'
-import TopNavigation from '../Components/LandingPage/TopNavigation';
-import BookSearchBar from '../Components/LandingPage/BookSearchBar';
-import BookSearchButton from '../Components/LandingPage/BookSearchButton';
-import PrimaryButton from '../Components/Shared/PrimaryButton';
+import LandingPageLayout from '../Layouts/LandingPageLayout'
+import TopNavigation from '../../Components/LandingPage/TopNavigation';
+import BookSearchBar from '../../Components/LandingPage/BookSearchBar';
+import BookSearchButton from '../../Components/LandingPage/BookSearchButton';
+import PrimaryButton from '../../Components/Shared/PrimaryButton';
 
 export default function LandingPage() {
     return (
@@ -14,7 +14,7 @@ export default function LandingPage() {
                     <BookSearchBar/>
                     <BookSearchButton/>
                 </div>
-                <PrimaryButton link="book/books" text="Browse"/>
+                <PrimaryButton link="book/list" text="Browse"/>
             </div>
         </LandingPageLayout>
     )

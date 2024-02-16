@@ -1,7 +1,7 @@
 import React from "react";
-import BookPageLayout from "./Layouts/BookPageLayout";
-import PosterImage from "../../images/poster-2.jpg"
-import PrimaryButton from "../Components/Shared/PrimaryButton";
+import BookPageLayout from "../Layouts/BookPageLayout";
+import PosterImage from "../../../images/poster-2.jpg"
+import PrimaryButton from "../../Components/Shared/PrimaryButton";
 
 export default function BookDetailPage() {
     return (

@@ -20,13 +20,14 @@ use Illuminate\Support\Facades\Route;
 // Homes
 Route::get('/', [LandingController::class, "index"])->name('home');
 
-// Auths
+// Authentications
 Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
 Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
 
-// Book
-Route::get('book/books/', [BookController::class, "books"])->name('book.books');
+// Books
+Route::get('book/list/', [BookController::class, "books"])->name('book.books');
 Route::get('book/details/', [BookController::class, "bookDetails"])->name('book.details');
 
 // Admin
 Route::get('admin/books', [AdminController::class, "books"])->name('admin.books');
+Route::get('admin/book/details', [AdminController::class, "bookDetails"])->name('admin.bookDetails');

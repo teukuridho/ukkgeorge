@@ -2,8 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build"
+        "dev": "vite & npx tailwindcss -i resources/css/input.css -o resources/css/app.css --watch",
+        "build": "npx tailwindcss -i resources/css/input.css -o resources/css/app.css --minify && vite build"
     },
     "devDependencies": {
         "axios": "^1.6.4",

@@ -8,10 +8,10 @@ use Inertia\Inertia;
 class BookController extends Controller
 {
     public function books() {
-        return Inertia::render('BooksPage');
+        return Inertia::render('Home/BooksPage');
     }
 
     public function bookDetails() {
-        return Inertia::render('BookDetailsPage');
+        return Inertia::render('Home/BookDetailsPage');
     }
 }

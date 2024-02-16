@@ -1,9 +1,9 @@
 import React from "react";
-import AuthPageLayout from "./Layouts/AuthPageLayout";
-import SiteTitle from "../Components/Shared/SiteTitle";
-import AuthTextInput from "../Components/AuthPage/AuthTextInput";
-import AuthPasswordInput from "../Components/AuthPage/AuthPasswordInput";
-import PrimaryButton from "../Components/Shared/PrimaryButton";
+import AuthPageLayout from "../Layouts/AuthPageLayout";
+import SiteTitle from "../../Components/Shared/SiteTitle";
+import AuthTextInput from "../../Components/AuthPage/AuthTextInput";
+import AuthPasswordInput from "../../Components/AuthPage/AuthPasswordInput";
+import PrimaryButton from "../../Components/Shared/PrimaryButton";
 import { Link } from "@inertiajs/react";
 export default function RegisterPage() {
     return <AuthPageLayout>
@@ -31,7 +31,7 @@ export default function RegisterPage() {
             justifyContent: 'center',
         }}>
             <PrimaryButton style={{
-                width: '100px'
+                width: '200px'
             }} text="Sign Up"/>
         </div>
     </AuthPageLayout>
