@@ -10,9 +10,13 @@ Syarat-syarat
 
 Cara menjalankan
 1. Jalankan di CLI `cp .env.example .env`
-2. Buka file `.env`, pastikan var "APP_URL" dan "VITE_BASE" benar
-3. Jalankan di CLI `composer install`
-4. Jalankan di CLI `npm install`
-5. Jalankan di CLI `node changeVendorInertia.js`
-6. Jalankan di CLI `npm run build`
-7. Buka situs
+2. Buat database di MySQL Server dengan nama `digitalibrary`
+3. Buka file `.env`, 
+    - pastikan var "APP_URL" dan "VITE_BASE" benar
+    - pastikan pengaturan database benar
+4. Jalankan di CLI `composer install`
+5. Jalankan di CLI `npm install`
+6. Jalankan di CLI `node changeVendorInertia.js`
+7. Jalankan di CLI `php artisan migrate`
+8. Jalankan di CLI `npm run build`
+9. Buka situs
