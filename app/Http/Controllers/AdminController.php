@@ -14,4 +14,8 @@ class AdminController extends Controller
     public function bookDetails() {
         return Inertia::render('Admin/BookDetailsPage');
     }
+
+    public function users() {
+        return Inertia::render('Admin/UsersPage');
+    }
 }

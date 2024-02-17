@@ -92,3 +92,19 @@ a {
     font-weight: 400;
     font-size: 15px;
 }
+
+th {
+    @apply  bg-[#F2F2F2] px-3 py-3 uppercase !tracking-tighter text-left border-collapse text-gray-600 !font-bold
+}
+
+tr:nth-child(odd) {
+    @apply bg-[#E6E6E6]
+}
+
+tr:nth-child(even) {
+    @apply !bg-gray-100
+}
+
+td {
+    @apply px-3 py-3 text-left border-collapse
+}

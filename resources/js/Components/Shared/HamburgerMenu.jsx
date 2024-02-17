@@ -10,7 +10,7 @@ export default function HamburgerMenu({sidebar: sideBar, topBar, children}) {
     const [menuState, setMenuState] = useState("default");
 
     // gets is mobile
-    const isMobile = screenSize.width <= 400;
+    const isMobile = screenSize.width <= 500;
 
     // init showSidebar
     let showSideBar = false;
@@ -103,7 +103,7 @@ export default function HamburgerMenu({sidebar: sideBar, topBar, children}) {
                         {topBar}
                     </div>
                     <div className={`
-                        p-5 sm:p-10 w-full h-full
+                        p-5 sm:p-10 h-full w-full
                         overflow-y-auto
                         ${
                             isMobile ?

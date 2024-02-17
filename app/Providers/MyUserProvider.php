@@ -3,20 +3,19 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Laravel\Sanctum\Sanctum;
 
-class AppServiceProvider extends ServiceProvider
+class MyUserProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      */
     public function register(): void
     {
-        // Sanctum::ignoreMigrations();
+        //
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      */
     public function boot(): void
     {

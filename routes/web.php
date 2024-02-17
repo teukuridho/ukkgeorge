@@ -17,17 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Homes
+// 
+
+// Home
 Route::get('/', [LandingController::class, "index"])->name('home');
 
-// Authentications
+// Authentications Views
 Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
 Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
 
-// Books
+// Book Views
 Route::get('book/list/', [BookController::class, "books"])->name('book.books');
 Route::get('book/details/', [BookController::class, "bookDetails"])->name('book.details');
 
-// Admin
+// Admin Views
 Route::get('admin/books', [AdminController::class, "books"])->name('admin.books');
 Route::get('admin/book/details', [AdminController::class, "bookDetails"])->name('admin.bookDetails');
+Route::get('admin/users', [AdminController::class, "users"])->name('admin.users');

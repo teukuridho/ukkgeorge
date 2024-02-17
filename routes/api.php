@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Authentication
+Route::post('auth/sign-up', [AuthService::class, "signUp"]);
+Route::post('auth/sign-in', [AuthService::class, "signIn"]);
+
+// Protecected routes
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    
 });

@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react"
 import React from "react"
-export default function PrimaryButton({text, children, style, onClick, link}) {
+export default function PrimaryButton({text, children, style, onClick, link, type}) {
     // determines "children"
     var item;
     if(children != null) {
@@ -22,9 +22,9 @@ export default function PrimaryButton({text, children, style, onClick, link}) {
     }
     else {
         return (
-            <div style={style} className="button primary-button" onClick={onClick}>
+            <button type={type == null ? "button" : type} style={style} className="button primary-button" onClick={onClick}>
                 {item}
-            </div>
+            </button>
         )
     }
 }
