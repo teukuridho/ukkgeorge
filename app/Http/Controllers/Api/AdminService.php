@@ -101,7 +101,8 @@ class AdminService extends Controller
             if(!$uploadResult) {
                 return response()->json([
                     "status" => false,
-                    "text" => "Gagal upload!"
+                    "text" => "Gagal upload!",
+                    "fileName" => $fileName
                 ]);
             }
 
