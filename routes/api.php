@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\AdminService;
 use App\Http\Controllers\Api\AuthService;
+use App\Http\Controllers\Api\BookService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Authentication
-Route::post('auth/sign-up', [AuthService::class, "signUp"]);
-Route::post('auth/sign-in', [AuthService::class, "signIn"]);
+// Not logged in middleware
+Route::group(["middleware" => ["not-logged-in"]], function() {
+    // Authentication
+    Route::post('auth/sign-up', [AuthService::class, "signUp"]);
+    Route::post('auth/sign-in', [AuthService::class, "signIn"]);
+});
 
-// Protecected routes
+// Logged in middleware
 Route::group(['middleware' => ['auth:sanctum']], function() {
-    
+    // Sign outs
+    Route::get('auth/sign-out', [AuthService::class, "signOut"]);
+
+    // User biasa only middleware
+    Route::group(['middleware' => ['biasa']], function() {
+        Route::get('book/borrow-book/{bookId}', [BookService::class, "borrowBook"]);
+    });
+
+    // Admin or petugas middleware
+    Route::group(['middleware' => ['admin-or-petugas']], function() {
+        Route::post('admin/save-book-details', [AdminService::class, "saveBookDetails"]);
+    });
+
+    // Admin middleware
+    Route::group(['middleware' => ['admin']], function() {
+        Route::get('admin/user/delete/{userId}', [AdminService::class, "deleteUser"]);
+        Route::post('admin/petugas/add', [AdminService::class, "addNewPetugas"]);
+    });
 });

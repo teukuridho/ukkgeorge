@@ -3,9 +3,9 @@ import HamburgerMenu from "../../Components/Shared/HamburgerMenu";
 import UserButton from "../../Components/Shared/UserButton";
 import SidebarItem from "../../Components/Shared/SidebarItem";
 
-const TopBar = () => {
+function TopBar({user}) {
     return <div className="flex items-center justify-end h-full px-3">
-        <UserButton/>
+        <UserButton user={user}/>
     </div>
 }
 
@@ -28,9 +28,9 @@ const SideBarMenu = () => {
     )
 }
 
-export default function AdminPageLayout({children}) {    
+export default function AdminPageLayout({children, user}) {    
     return (
-        <HamburgerMenu sidebar={SideBarMenu()} topBar={TopBar()}>
+        <HamburgerMenu sidebar={SideBarMenu()} topBar={TopBar({user: user})}>
             {children}        
         </HamburgerMenu>
     );

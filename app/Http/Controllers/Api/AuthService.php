@@ -66,7 +66,7 @@ class AuthService extends Controller
             // returns
             return response()->json([
                 "status" => true,
-                "text" => "Berhasil login!"
+                "text" => "Berhasil login!",
             ]);
         }
         else {
@@ -78,5 +78,22 @@ class AuthService extends Controller
         }
 
         
+    }
+
+    /**
+     * Signs out
+     */
+    public function signOut(Request $request) {
+        // 
+        Auth::guard('web')->logout();
+
+        // 
+        $request->session()->invalidate();
+
+        // 
+        $request->session()->regenerateToken();
+
+        // redirects
+        return response()->redirectToRoute('home');
     }
 }

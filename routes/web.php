@@ -22,15 +22,33 @@ use Illuminate\Support\Facades\Route;
 // Home
 Route::get('/', [LandingController::class, "index"])->name('home');
 
-// Authentications Views
-Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
-Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
+// Book
+Route::get('book/list/', [BookController::class, "books"])->name('book.list');
+Route::get('book/details/{bookId}', [BookController::class, "bookDetails"])->name('book.details');
 
-// Book Views
-Route::get('book/list/', [BookController::class, "books"])->name('book.books');
-Route::get('book/details/', [BookController::class, "bookDetails"])->name('book.details');
+// Not logged in middleware
+Route::group(['middleware' => ['not-logged-in']], function() {
+    // Auth
+    Route::get('auth/sign-in', [AuthController::class, "signIn"])->name('auth.login');
+    Route::get('auth/sign-up', [AuthController::class, "signUp"])->name('auth.register');
+});
 
-// Admin Views
-Route::get('admin/books', [AdminController::class, "books"])->name('admin.books');
-Route::get('admin/book/details', [AdminController::class, "bookDetails"])->name('admin.bookDetails');
-Route::get('admin/users', [AdminController::class, "users"])->name('admin.users');
+// Logged in middleware
+Route::group(['middleware' => ['auth']], function() {
+    // User biasa only middleware
+    Route::group(['middleware' => ['biasa']], function() {
+        Route::get('book/borrowed-books/', [BookController::class, "borrowedBooks"])->name('book.borrowed-books');
+    });
+
+    // Petugas and admin only middleware
+    Route::group(['middleware' => ['admin-or-petugas']], function() {
+        Route::get('admin/books', [AdminController::class, "books"])->name('admin.books');
+        Route::get('admin/book/details/{bookId?}', [AdminController::class, "bookDetails"])->name('admin.bookDetails');
+        Route::get('admin/users', [AdminController::class, "users"])->name('admin.users');
+    });
+
+    // Admin only middleware
+    Route::group(['middleware' => ['admin']], function() {
+        Route::get('admin/add-new-petugas', [AdminController::class, "addNewPetugas"])->name('admin.add-new-petugas');
+    });
+});

@@ -1,7 +1,14 @@
-import React, { useState } from "react";
-export default function BookCover() {
+import React, { useLayoutEffect, useState } from "react";
+export default function BookCover({name, image}) {
     // use state cover image
     const [coverImage, setCoverImage] = useState(null);
+
+    // sets coverImage if image not null
+    if(image != null) {
+        useLayoutEffect(() => {
+            setCoverImage(image);
+        }, [])
+    }
 
     // handles input onchange
     function handleChange(ev) {
@@ -27,7 +34,7 @@ export default function BookCover() {
     return (
         <div className="select-none border-black h-full border-2 border-dashed rounded-lg  flex flex-col justify-center items-center">
             <label className="w-full h-full">
-                <input onChange={handleChange} className="hidden" accept="image/*" type="file"/>
+                <input name={name} onChange={handleChange} className="hidden" accept="image/*" type="file"/>
                 <div className="flex flex-col justify-center items-center h-full w-full">
                 {
                     coverImage == null ?

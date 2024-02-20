@@ -18,5 +18,6 @@ Cara menjalankan
 5. Jalankan di CLI `npm install`
 6. Jalankan di CLI `node changeVendorInertia.js`
 7. Jalankan di CLI `php artisan migrate`
-8. Jalankan di CLI `npm run build`
-9. Buka situs
+8. Jalankan di CLI `php artisan db:Seed`
+9. Jalankan di CLI `npm run build`
+10. Buka situs

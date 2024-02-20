@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import LandingPageLayout from '../Layouts/LandingPageLayout'
 import TopNavigation from '../../Components/LandingPage/TopNavigation';
 import BookSearchBar from '../../Components/LandingPage/BookSearchBar';

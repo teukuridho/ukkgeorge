@@ -38,6 +38,9 @@ export default function RegisterPage() {
                     icon: 'success',
                     title: 'Berhasil',
                     html: response.data.text
+                }).then(() => {
+                    // reset forms
+                    ev.target.reset();
                 })
             }
             // handles fails

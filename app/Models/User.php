@@ -19,6 +19,9 @@ class User extends Authenticatable
     protected $guarded = [
         
     ];
+
+    // hidden attribute
+    protected $hidden = ["Password"];
     
     public function getAuthPassword()
     {

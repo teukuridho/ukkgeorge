@@ -1,44 +1,146 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import AdminPageLayout from "../Layouts/AdminPageLayout";
 import PrimaryButton from "../../Components/Shared/PrimaryButton";
 import BookCover from "../../Components/AdminPage/BookCover";
-export default function BookDetailsPage() {
+import { Checkbox, FormControlLabel, FormGroup, InputLabel, TextField } from "@mui/material";
+import axios from "axios";
+import Swal from 'sweetalert2'
+import withReactContent from "sweetalert2-react-content";
+import { router } from "@inertiajs/react";
+export default function BookDetailsPage({user, book, bookCover, categories}) {
+    // gets baseurl
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+
+    // use set state
+    const [state, setState] = useState({
+        Judul: "",
+        Penulis: "",
+        Sinposis: "",
+        Penerbit: "",
+        TahunTerbit: ""
+    });
+
+    // handles text change
+    const handleTextChange = (ev, prop) => {
+        let newState = {
+            ...state,
+
+        }
+        newState[prop] = ev.target.value; 
+        setState(newState)
+    }
+
+    // loads book if book not null
+    if(book != null) {
+        useLayoutEffect(() => {
+            setState(book);
+        }, [])
+    }
+
+    // handles submit
+    const handleSubmit = (ev) => {
+        // prevents defualt
+        ev.preventDefault();
+
+        // gets form data
+        const formData = new FormData(ev.target);
+
+        // inserts id if book not null
+        if(book != null) {
+            formData.set("id", book.BukuId);
+        }
+
+        // init swal
+        const MySwal = withReactContent(Swal);
+
+        // shows loading
+        MySwal.fire({
+            didOpen: () => {
+                MySwal.showLoading();
+            }  
+        })
+
+        // request
+        axios.post(`${baseUrl}/api/admin/save-book-details`, formData).then((response) => {
+            // handles
+            if(response.data.status) {
+                MySwal.fire({
+                    icon:'success',
+                    title: "Berhasil",
+                    html: response.data.text
+                }).then(() => {
+                    if(response.data.id != null) {
+                        router.visit(`${baseUrl}/admin/book/details/${response.data.id}`);
+                    }
+                })
+            }
+            else {
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    html: response.data.text
+                })
+            }
+        }).catch(ex => {
+            MySwal.fire({
+                icon:'error',
+                title: 'Gagal',
+                text: ex
+            })
+        })
+
+        return false;
+
+        
+    }
+
+    // returns
     return (
-        <AdminPageLayout>
+        <AdminPageLayout user={user}>
             <div className="grid grid-cols-1 lg:grid-cols-4">
                 <div className="col-start-1 lg:col-start-2">
-                    <h3 className="font-semibold text-xl">Tambah Buku</h3>
+                    <h3 className="font-semibold text-xl">
+                        {
+                            book == null ? "Tambah Buku" : "Ubah Buku"
+                        }
+                    </h3>
                 </div>
             </div>
-            <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
+            <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
                 <div className="">
                     <div className="max-h-96 aspect-[2/3]">
-                        <BookCover/>
+                        <BookCover image={bookCover} name="book-cover"/>
                     </div>
                 </div>
                 <div className="col-span-1 lg:col-span-3">
-                    <form>
-                        <div className="space-y-4">
-                            <input type="text" placeholder="Nama Buku" className="my-input"/>
-                            <input type="text" placeholder="Penulis" className="my-input"/>
-                            <textarea className="my-input !h-56 !mb-0" placeholder="Sinopsis">
-                            </textarea>
-                            <input type="text" placeholder="Penerbit" className="my-input"/>
-                            <div className="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="Jumlah Halaman" className="my-input"/>
-                                <input type="text" placeholder="Tahun Terbit" className="my-input"/>
-                                <input type="text" placeholder="Bahasa" className="my-input"/>
-                                <input type="text" placeholder="Kategori" className="my-input"/>
-                            </div>
-                        </div>
-                        <div className="mt-5 flex justify-start">
-                            <PrimaryButton>
-                                Tambahkan Buku
-                            </PrimaryButton>
-                        </div>
-                    </form>
+                    <div className="space-y-4">
+                        <TextField onChange={(ev) => handleTextChange(ev, "Judul")} name="book-name" label="Nama Buku" placeholder="Nama Buku" className="w-full" value={state.Judul}/>
+                        <TextField onChange={(ev) => handleTextChange(ev, "Penulis")} name="author" label="Penulis" placeholder="Penulis" className="w-full" value={state?.Penulis}/>
+                        <TextField onChange={(ev) => handleTextChange(ev, "Sinopsis")} name="synopsis" label="Sinopsis" placeholder="Sinopsis" className="w-full" value={state?.Sinopsis} InputProps={{
+                            rows: 7,
+                            multiline: true,
+                            inputComponent: 'textarea'
+                        }}/>
+                        <TextField onChange={(ev) => handleTextChange(ev, "Penerbit")} name="publisher" label="Penerbit" placeholder="Penerbit" className="w-full" value={state?.Penerbit}/>
+                        <TextField onChange={(ev) => handleTextChange(ev, "TahunTerbit")} name="publication-year" label="Tahun Terbit" placeholder="Tahun Terbit" className="w-full" value={state?.TahunTerbit}/>
+                        {/* <InputLabel>Kategori</InputLabel>
+                        <div className="grid grid-cols-4">
+                            {
+                                categories.map((item) => {
+                                    return <FormControlLabel key={item.KategoriId} name="categories[]" value={item.KategoriId} control={<Checkbox />} label={item.NamaKategori} />        
+                                })
+                            }
+                        </div> */}
+                    </div>
+                    <div className="mt-5 flex justify-start">
+                        <PrimaryButton type="submit">
+                            {
+                                book == null ? "Tambahkan Buku" : "Ubah Buku"
+                            }
+                        </PrimaryButton>
+                    </div>
                 </div>
-            </div>
+            </form>
         </AdminPageLayout>
     )
 }
