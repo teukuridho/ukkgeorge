@@ -23,7 +23,11 @@ export default function BookDetailPage({user, book}) {
         })
 
         // request
-        axios.get(`${baseUrl}/api/book/borrow-book/${book.BukuId}`).then(response => {
+        axios.get(`${baseUrl}/api/book/borrow-book/${book.BukuId}`, {
+            headers: {
+                Accept: 'application/json'
+            }
+        }).then(response => {
             // handles
             if(response.data.status) {
                 MySwal.fire({
