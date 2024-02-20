@@ -20,5 +20,6 @@ Cara menjalankan
 7. Jalankan di CLI `php artisan migrate`
     Jika error, fresh install `php artisan db:wipe`, lalu jalankan ulang `php artisan migrate`
 8. Jalankan di CLI `php artisan db:seed`
-9. Jalankan di CLI `npm run build`
-10. Buka situs
+9. Jalankan di CLI `php artisan storage:link`
+10. Jalankan di CLI `npm run build`
+11. Buka situs
