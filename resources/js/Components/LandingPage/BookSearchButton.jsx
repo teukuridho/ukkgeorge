@@ -1,9 +1,11 @@
 import React from "react"
 import SearchIcon from "../../../images/search.svg"
-export default function BookSearchButton() {
+export default function BookSearchButton({onClick, type}) {
     return (
-        <div className="book-search-button">
-            <img src={SearchIcon}/>
-        </div>
+        <button type={type}>
+            <div className="book-search-button" onClick={onClick}>
+                <img src={SearchIcon}/>
+            </div>
+        </button>
     )
 }

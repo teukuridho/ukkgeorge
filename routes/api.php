@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AdminService;
 use App\Http\Controllers\Api\AuthService;
 use App\Http\Controllers\Api\BookService;
+use App\Http\Controllers\Api\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,17 +18,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Not logged in middleware
+// Not logged in only middleware
 Route::group(["middleware" => ["not-logged-in"]], function() {
     // Authentication
     Route::post('auth/sign-up', [AuthService::class, "signUp"]);
     Route::post('auth/sign-in', [AuthService::class, "signIn"]);
 });
 
-// Logged in middleware
+// Logged in only middleware
 Route::group(['middleware' => ['auth:sanctum']], function() {
     // Sign outs
     Route::get('auth/sign-out', [AuthService::class, "signOut"]);
+
+    // Change password
+    Route::post('user/change-password', [UserService::class, 'changePassword']);
 
     // User biasa only middleware
     Route::group(['middleware' => ['biasa']], function() {

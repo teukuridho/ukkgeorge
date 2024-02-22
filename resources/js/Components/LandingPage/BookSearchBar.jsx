@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-export default function BookSearchBar() {
+export default function BookSearchBar({name}) {
     const [text, useText] = useState("");
 
     // 
@@ -9,6 +9,6 @@ export default function BookSearchBar() {
     }
 
     return (
-        <input onInput={handleInput} type="text" className="book-search-bar" placeholder="Search Books" value={text}/>
+        <input name={name} onInput={handleInput} type="text" className="book-search-bar" placeholder="Search Books" value={text}/>
     );
 }

@@ -13,6 +13,10 @@ export default defineConfig(({mode}) => {
                 refresh: true,
             }),
         ],
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.jsx')
+            return pages[`./Pages/${name}.jsx`]()
+        },
         build: {
             cssCodeSplit: true,
             lib: false,

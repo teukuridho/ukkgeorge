@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class BookController extends Controller
 {
-    public function books() {
+    public function books($keyword = null) {
         // gets user
         $user = auth()->user();
 
@@ -23,9 +23,11 @@ class BookController extends Controller
             return $book;
         });
 
+        // returns
         return Inertia::render('Home/BooksPage', [
             "user" => $user,
-            "books" => $books
+            "books" => $books,
+            "keyword" => $keyword
         ]);
     }
 

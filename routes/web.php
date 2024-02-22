@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, "index"])->name('home');
 
 // Book
-Route::get('book/list/', [BookController::class, "books"])->name('book.list');
+Route::get('book/list/{keyword?}', [BookController::class, "books"])->name('book.list');
 Route::get('book/details/{bookId}', [BookController::class, "bookDetails"])->name('book.details');
 
 // Not logged in middleware
@@ -35,6 +36,9 @@ Route::group(['middleware' => ['not-logged-in']], function() {
 
 // Logged in middleware
 Route::group(['middleware' => ['auth']], function() {
+    // Change password
+    Route::get('user/change-password', [UserController::class, 'changePassword'])->name('user.change-password');
+
     // User biasa only middleware
     Route::group(['middleware' => ['biasa']], function() {
         Route::get('book/borrowed-books/', [BookController::class, "borrowedBooks"])->name('book.borrowed-books');
