@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -38,6 +39,11 @@ class BookController extends Controller
         // gets book
         $book = Buku::where('BukuId', $bookId)->first();
 
+        // gets borrow
+        $borrow = Peminjaman::where('UserId', Auth::user()->UserId)->where('BukuId', $bookId)
+            ->where('StatusPeminjaman', 'Diterima')
+            ->first();
+
         // ensure book exists
         if(empty($book)) {
             return response()->redirectToRoute('book.list');
@@ -50,7 +56,8 @@ class BookController extends Controller
 
         return Inertia::render('Home/BookDetailsPage', [
             "user" => $user,
-            "book" => $book
+            "book" => $book,
+            "borrow" => $borrow
         ]);
     }
 
@@ -59,18 +66,22 @@ class BookController extends Controller
         $user = auth()->user();
 
         // gets borrowed books
-        $borrowedBooks = Peminjaman::where('UserId', $user->UserId)->get()->map(function($borrows) {
-            // gets book
-            $book = $borrows->book;
+        $borrowedBooks = Peminjaman::where('UserId', $user->UserId)
+            ->where('StatusPeminjaman', 'Diterima')
+            ->get()
+            ->map(function($borrows) {
+                // gets book
+                $book = $borrows->book;
 
-            // fills cover
-            if(!empty($book->filename)) {
-                $book->cover = Storage::url($book->filename);
-            };
+                // fills cover
+                if(!empty($book->filename)) {
+                    $book->cover = Storage::url($book->filename);
+                };
 
-            // returns
-            return $book;
-        });
+                // returns
+                return $book;
+            }
+        );
 
         // returns
         return Inertia::render('Home/BorrowedBooksPage', [

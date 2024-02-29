@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // User biasa only middleware
     Route::group(['middleware' => ['biasa']], function() {
         Route::get('book/borrow-book/{bookId}', [BookService::class, "borrowBook"]);
+        Route::get('book/return-book/{bookId}', [BookService::class, "returnBook"]);
     });
 
     // Admin or petugas middleware

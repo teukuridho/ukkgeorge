@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BookPageLayout from "../Layouts/BookPageLayout";
 import PosterImage from "../../../images/poster-2.jpg"
 import PrimaryButton from "../../Components/Shared/PrimaryButton";
@@ -6,7 +6,10 @@ import Swal from 'sweetalert2'
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 
-export default function BookDetailPage({user, book}) {
+export default function BookDetailPage({user, book, borrow}) {    
+    // use state isBorrowed
+    const [isBorrowed, setIsBorrowed] = useState(borrow != null);
+
     // handles borrow book
     const handleBorrowBook = () => {
         // gets baseurl
@@ -35,6 +38,62 @@ export default function BookDetailPage({user, book}) {
                     title: "Berhasil",
                     html: response.data.text
                 }).then(() => {
+                    setIsBorrowed(true)
+                })
+            }
+            else {
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    html: response.data.text
+                })
+            }
+        }).catch(ex => {
+            MySwal.fire({
+                icon:'error',
+                title: 'Gagal',
+                text: ex
+            })
+        })
+    }
+
+    // handle return book
+    const handleReturnBook = async () => {
+        // gets baseurl
+        const baseUrl = import.meta.env.VITE_BASE_URL;
+
+        // init swal
+        const MySwal = withReactContent(Swal);
+
+        // shows modal
+        const modalResult = await MySwal.fire({
+            icon: 'warning',
+            title: 'Peringatan',
+            text: 'Yakin ingin mengembalikan buku?',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        })
+
+        // 
+        if(!modalResult.isConfirmed) {
+            return;
+        }
+
+        // request
+        axios.get(`${baseUrl}/api/book/return-book/${book.BukuId}`, {
+            headers: {
+                Accept: 'application/json'
+            }
+        }).then(response => {
+            // handles
+            if(response.data.status) {
+                MySwal.fire({
+                    icon:'success',
+                    title: "Berhasil",
+                    html: response.data.text
+                }).then(() => {
+                    setIsBorrowed(false);
                 })
             }
             else {
@@ -94,7 +153,12 @@ export default function BookDetailPage({user, book}) {
                     </div>
                 </div>
                 <div className="flex justify-center mt-5">
-                    <PrimaryButton onClick={handleBorrowBook} text="Pinjam Buku"/>
+                    {
+                        isBorrowed ?
+                            <PrimaryButton className={"!bg-purple-800"} onClick={handleReturnBook} text="Kembalikan Buku"/>
+                        :
+                            <PrimaryButton onClick={handleBorrowBook} text="Pinjam Buku"/>
+                    }
                 </div>
             </div>
         </BookPageLayout>
