@@ -1,8 +1,6 @@
 import React from "react";
 import AdminPageLayout from "../Layouts/AdminPageLayout";
-import Users from "../../Components/AdminPage/Users";
 import PrimaryButton from "../../Components/Shared/PrimaryButton";
-import BookCategories from "../../Components/AdminPage/BookCategories";
 import BorrowedBooks from "../../Components/AdminPage/BorrowedBooks";
 import XLSX from "xlsx-js-style";
 
