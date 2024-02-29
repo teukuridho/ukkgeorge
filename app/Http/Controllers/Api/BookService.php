@@ -42,7 +42,7 @@ class BookService extends Controller
             "UserId" => Auth::user()->UserId,
             "BukuId" => $bookId,
             "TanggalPeminjaman" => Carbon::now(),
-            "TanggalPengembalian" => Carbon::now()->addDay(7),
+            // "TanggalPengembalian" => Carbon::now()->addDay(7),
             "StatusPeminjaman" => "Diterima"
         ]))->save();
 
@@ -90,6 +90,7 @@ class BookService extends Controller
 
         // returns the book
         $existingBorrow->StatusPeminjaman = 'Dikembalikan';
+        $existingBorrow->TanggalPeminjaman = Carbon::now();
         $existingBorrow->save();
 
         // returns the response

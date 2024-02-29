@@ -78,7 +78,7 @@ export default function HamburgerMenu({sidebar: sideBar, topBar, children}) {
                                 "static w-0 hidden"
                         : 
                             showSideBar ?
-                                "w-64" :
+                                "min-w-64" :
                                 "w-0 hidden"
                     }    
                 `}>

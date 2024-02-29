@@ -28,7 +28,7 @@ class SaveBookDetailsRequest extends CustomRequest
             "synopsis"          => "required|string",
             "publisher"         => "required|string",
             "publication-year"  => "required|string",
-            "categories"        => "required|array|size:1",
+            "categories"        => "required|array|min:1",
         ];
     }
 
@@ -42,7 +42,7 @@ class SaveBookDetailsRequest extends CustomRequest
             "publication-year.required" => "Tahun diperlukan!",
             "categories.required"       => "Kategori diperlukan!",
             "categories.array"          => "Kategori salah; harus array!",
-            "categories.size"           => "Harus punya minimal 1 kategori!",
+            "categories.min"           => "Harus punya minimal 1 kategori!",
         ];
     }
 }
