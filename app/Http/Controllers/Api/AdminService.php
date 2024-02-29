@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddNewPetugasRequest;
+use App\Http\Requests\SaveBookCategoryDetailsRequest;
 use App\Http\Requests\SaveBookDetailsRequest;
 use App\Models\Buku;
+use App\Models\KategoriBuku;
+use App\Models\KategoriBukuReleasi;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -114,6 +117,21 @@ class AdminService extends Controller
         // handles
         if($saveResult) {
             $isJustCreated = empty($request['id']);
+
+            // save categories
+            KategoriBukuReleasi::where('BukuId', $book->BukuId)->delete();
+            foreach($request['categories'] as $category) {
+                // ensure category exist
+                $catExists = !empty(KategoriBuku::where('KategoriId', $category)->first());
+
+                if($catExists) {
+                    (new KategoriBukuReleasi([
+                        "BukuId" => $book->BukuId,
+                        "KategoriId" => $category,
+                    ]))->save();
+                }
+            }
+
             return response()->json([
                 "status" => true,
                 "text" => $isJustCreated ? "Berhasil tambah buku!" : "Berhasil ubah buku!",
@@ -182,6 +200,19 @@ class AdminService extends Controller
         return response()->json([
             'status' => true,
             'text' => 'Berhasil!'
+        ]);
+    }
+
+    public function saveBookCategoryDetails(SaveBookCategoryDetailsRequest $request) {
+        // create new book category
+        $bookCategory = new KategoriBuku();
+        $bookCategory->NamaKategori = $request['category-name'];
+        $bookCategory->save();
+
+        // returns
+        return response()->json([
+            'status' => true,
+            'text' => 'Berhasil tambah kategori'
         ]);
     }
 }

@@ -9,6 +9,11 @@ class KategoriBukuReleasi extends Model
 {
     use HasFactory;
 
-    public $table = "kategoribuku_releasi";
+    public $table = "kategoribuku_relasi";
     protected $primaryKey = "KategoriBukuId";
+
+    // makes all fields fillable
+    protected $guarded = [
+        
+    ];
 }

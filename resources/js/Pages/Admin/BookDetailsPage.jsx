@@ -3,6 +3,9 @@ import AdminPageLayout from "../Layouts/AdminPageLayout";
 import PrimaryButton from "../../Components/Shared/PrimaryButton";
 import BookCover from "../../Components/AdminPage/BookCover";
 import { 
+    Checkbox,
+    FormControlLabel,
+    InputLabel,
     TextField, 
     // Checkbox, FormControlLabel, FormGroup, InputLabel 
 } from "@mui/material";
@@ -10,9 +13,15 @@ import axios from "axios";
 import Swal from 'sweetalert2'
 import withReactContent from "sweetalert2-react-content";
 import { router } from "@inertiajs/react";
-export default function BookDetailsPage({user, book, bookCover, categories}) {
+export default function BookDetailsPage({user, book, bookCover, categories, selectedCategories}) {
     // gets baseurl
     const baseUrl = import.meta.env.VITE_BASE_URL;
+
+    // gets defaultCheckBoxState
+    let defaultCheckBoxState = new Set();
+    for(const selectedCategory of selectedCategories) {
+        defaultCheckBoxState.add(selectedCategory.KategoriId)
+    }
 
     // use set state
     const [state, setState] = useState({
@@ -20,8 +29,11 @@ export default function BookDetailsPage({user, book, bookCover, categories}) {
         Penulis: "",
         Sinposis: "",
         Penerbit: "",
-        TahunTerbit: ""
+        TahunTerbit: "",
     });
+
+    // use checkbox state
+    const [checkBoxState, setCheckBoxState] = useState(defaultCheckBoxState)
 
     // handles text change
     const handleTextChange = (ev, prop) => {
@@ -38,6 +50,20 @@ export default function BookDetailsPage({user, book, bookCover, categories}) {
         useLayoutEffect(() => {
             setState(book);
         }, [])
+    }
+
+    // handles checkbox chnage
+    const handleCheckBoxChange = (ev) => {
+        let newCheckBoxState = checkBoxState;
+
+        if(ev.target.checked) {
+            newCheckBoxState.add(Number.parseInt(ev.target.value))
+        }
+        else {
+            newCheckBoxState.delete(Number.parseInt(ev.target.value))
+        }
+
+        setCheckBoxState(new Set(newCheckBoxState))
     }
 
     // handles submit
@@ -126,14 +152,22 @@ export default function BookDetailsPage({user, book, bookCover, categories}) {
                         }}/>
                         <TextField onChange={(ev) => handleTextChange(ev, "Penerbit")} name="publisher" label="Penerbit" placeholder="Penerbit" className="w-full" value={state?.Penerbit}/>
                         <TextField onChange={(ev) => handleTextChange(ev, "TahunTerbit")} name="publication-year" label="Tahun Terbit" placeholder="Tahun Terbit" className="w-full" value={state?.TahunTerbit}/>
-                        {/* <InputLabel>Kategori</InputLabel>
+                        <InputLabel>Kategori</InputLabel>
                         <div className="grid grid-cols-4">
                             {
                                 categories.map((item) => {
-                                    return <FormControlLabel key={item.KategoriId} name="categories[]" value={item.KategoriId} control={<Checkbox />} label={item.NamaKategori} />        
+                                    return <FormControlLabel 
+                                        key={item.KategoriId} 
+                                        name="categories[]" 
+                                        value={item.KategoriId} 
+                                        checked={checkBoxState.has(item.KategoriId)}
+                                        onChange={handleCheckBoxChange}
+                                        control={<Checkbox  />} 
+                                        label={item.NamaKategori} 
+                                    />
                                 })
                             }
-                        </div> */}
+                        </div>
                     </div>
                     <div className="mt-5 flex justify-start">
                         <PrimaryButton type="submit">

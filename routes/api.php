@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // Admin or petugas middleware
     Route::group(['middleware' => ['admin-or-petugas']], function() {
         Route::post('admin/save-book-details', [AdminService::class, "saveBookDetails"]);
+        Route::post('admin/save-book-category-details', [AdminService::class, "saveBookCategoryDetails"]);
     });
 
     // Admin middleware

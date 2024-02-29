@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\KategoriBuku;
+use App\Models\KategoriBukuReleasi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,12 +58,19 @@ class AdminController extends Controller
             }
         }
 
+        // gets selected categories
+        $selectedCategories = [];
+        if(!empty($book)) {
+            $selectedCategories = KategoriBukuReleasi::where('BukuId', $book->BukuId)->get();
+        }
+
         // returns
         return Inertia::render('Admin/BookDetailsPage', [
             "user" => $user,
             "book" => $book,
             "bookCover" => $bookCover,
-            "categories" => $categories
+            "categories" => $categories,
+            "selectedCategories" => $selectedCategories
         ]);
     }
 
@@ -87,6 +95,30 @@ class AdminController extends Controller
         // renders
         return Inertia::render('Admin/AddNewPetugasPage', [
             "user" => $user
+        ]);
+    }
+
+    public function bookCategories() {
+        // gets user
+        $user = Auth::user();
+
+        // gets categories
+        $categories = KategoriBuku::all();
+
+        // renders
+        return Inertia::render('Admin/BookCategoriesPage', [
+            'user' => $user,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function bookCategoryDetails($bookCategoryId = null) {
+        // gets user
+        $user = Auth::user();
+
+        // returns
+        return Inertia::render('Admin/BookCategoryDetailsPage', [
+            'user' => $user
         ]);
     }
 }
