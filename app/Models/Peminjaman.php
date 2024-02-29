@@ -20,4 +20,8 @@ class Peminjaman extends Model
     public function book() {
         return $this->belongsTo(Buku::class, 'BukuId', 'BukuId');
     }
+
+    public function borrower() {
+        return $this->belongsTo(User::class, 'UserId', 'UserId');
+    }
 }

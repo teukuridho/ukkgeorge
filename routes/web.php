@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('admin/users', [AdminController::class, "users"])->name('admin.users');
         Route::get('admin/book-categories', [AdminController::class, "bookCategories"])->name('admin.bookCategories');
         Route::get('admin/book-category/details', [AdminController::class, "bookCategoryDetails"])->name('admin.bookCategoryDetails');
+        Route::get('admin/borrowed-books', [AdminController::class, "borrowedBooks"])->name('admin.borrowedBooks');
     });
 
     // Admin only middleware

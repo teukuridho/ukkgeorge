@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\KategoriBuku;
 use App\Models\KategoriBukuReleasi;
+use App\Models\Peminjaman;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -119,6 +120,20 @@ class AdminController extends Controller
         // returns
         return Inertia::render('Admin/BookCategoryDetailsPage', [
             'user' => $user
+        ]);
+    }
+
+    public function borrowedBooks() {
+        // gets user
+        $user = Auth::user();
+
+        // gets borrowed
+        $borrowedBooks = Peminjaman::with(['book', 'borrower'])->get();
+
+        // returns
+        return Inertia::render('Admin/BorrowedBooksPage', [
+            'user' => $user,
+            'borrowedBooks' => $borrowedBooks
         ]);
     }
 }
