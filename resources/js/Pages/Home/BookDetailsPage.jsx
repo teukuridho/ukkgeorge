@@ -118,7 +118,7 @@ export default function BookDetailPage({user, book, borrow}) {
             <div>
                 <div className="flex flex-col sm:flex-row gap-5 sm:gap-8 mt-5">
                     <div className="basis-[50px] grow flex justify-center">
-                        <img src={book.cover} className=""/>
+                        <img src={`${book.cover}?update=${book.updated_at}`} className=""/>
                     </div>
                     <div className="basis-[200px] grow-[3]">
                         <h4 className="text-[#818181] text-lg font-light">{book.Penulis }</h4>

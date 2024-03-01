@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-export default function BookCover({name, image}) {
+export default function BookCover({name, image, update}) {
     // use state cover image
     const [coverImage, setCoverImage] = useState(null);
 
@@ -44,7 +44,15 @@ export default function BookCover({name, image}) {
                             </svg>
                             <p className="text-xs lg:text-sm mt-3">Klik untuk menambahkan cover</p>
                         </div> :
-                        <img src={coverImage} className="object-cover w-full h-full rounded-lg"/>
+                        <img 
+                            src={
+                                image == null ?
+                                    `${coverImage}?update=${update}`
+                                : 
+                                coverImage
+                            } 
+                            className="object-cover w-full h-full rounded-lg"
+                        />
                 }
                 </div>
             </label>

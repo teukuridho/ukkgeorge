@@ -59,8 +59,9 @@ class AdminService extends Controller
                     $fileNameWithoutFormat = $explode[0];
 
                     // if filename without format equals with id, deletes
-                    if($fileNameWithoutFormat == $book->id) {
+                    if($fileNameWithoutFormat == $book->BukuId) {
                         Storage::disk('public')->delete($fileName);
+                        break;
                     }
                 }
             }
@@ -85,7 +86,7 @@ class AdminService extends Controller
             if(!str_contains($photo->getClientMimeType(), "image")) {
                 return [
                     "status" => false,
-                    "text" => "File bukan merupakan foto!"
+                    "text" => "File bukan merupakan foto, tipe file: " . $photo->getClientMimeType() . "!",
                 ];
             }
 

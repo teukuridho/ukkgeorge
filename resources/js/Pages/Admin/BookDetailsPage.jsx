@@ -138,7 +138,7 @@ export default function BookDetailsPage({user, book, bookCover, categories, sele
             <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
                 <div className="">
                     <div className="max-h-96 aspect-[2/3]">
-                        <BookCover image={bookCover} name="book-cover"/>
+                        <BookCover update={book.updated_at} image={bookCover} name="book-cover"/>
                     </div>
                 </div>
                 <div className="col-span-1 lg:col-span-3">
