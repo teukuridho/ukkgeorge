@@ -40,9 +40,12 @@ class BookController extends Controller
         $book = Buku::where('BukuId', $bookId)->first();
 
         // gets borrow
-        $borrow = Peminjaman::where('UserId', Auth::user()->UserId)->where('BukuId', $bookId)
+        $borrow = null;
+        if(!empty($user)) {
+            $borrow = Peminjaman::where('UserId', Auth::user()->UserId)->where('BukuId', $bookId)
             ->where('StatusPeminjaman', 'Diterima')
             ->first();
+        }
 
         // ensure book exists
         if(empty($book)) {
