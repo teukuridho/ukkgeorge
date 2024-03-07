@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function() {
     // User biasa only middleware
     Route::group(['middleware' => ['biasa']], function() {
         Route::get('book/borrowed-books/', [BookController::class, "borrowedBooks"])->name('book.borrowed-books');
+        Route::get('book/collection/', [BookController::class, "collection"])->name('book.collection');
     });
 
     // Petugas and admin only middleware

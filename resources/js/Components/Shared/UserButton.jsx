@@ -46,20 +46,31 @@ export default function UserButton({user}) {
                             </button>
                             <Popper id="user-button" open={showMenu} anchorEl={document.getElementById("user-button-container")}>
                                 <div className={`
-                                        bg-white w-32 xxs:w-48 mt-2 px-3 py-3 border-2 border-black rounded-md right-0 mr-3
+                                        bg-white w-32 xxs:w-56 mt-2 px-3 py-3 border-2 border-black rounded-md right-0 mr-3
                                     }`}>
                                     <ul className="list-inside text-left space-y-2">
                                         {
                                             user != null && user.Tipe == "Biasa" ? 
-                                                <Link href={`${baseUrl}/book/borrowed-books`}>
-                                                    <li className="flex gap-1 items-center">
-                                                        <svg className="w-5 h-5 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path fillRule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2c.6 0 1-.4 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clipRule="evenodd"/>
-                                                        </svg>
+                                                <div className="space-y-2">
+                                                    <Link href={`${baseUrl}/book/borrowed-books`}>
+                                                        <li className="flex gap-1 items-center">
+                                                            <svg className="w-5 h-5 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path fillRule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2c.6 0 1-.4 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clipRule="evenodd"/>
+                                                            </svg>
 
-                                                        <p>Buku Saya</p>
-                                                    </li>
-                                                </Link>
+                                                            <p>Buku Yang Dipinjam</p>
+                                                        </li>
+                                                    </Link>
+                                                    <Link href={`${baseUrl}/book/collection`}>
+                                                        <li className="flex gap-1 items-center">
+                                                            <svg className="w-5 h-5 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path fillRule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2c.6 0 1-.4 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clipRule="evenodd"/>
+                                                            </svg>
+
+                                                            <p>Koleksi Buku</p>
+                                                        </li>
+                                                    </Link>
+                                                </div>
                                             : 
                                                 <></>
                                         }

@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
         Route::get('book/borrow-book/{bookId}', [BookService::class, "borrowBook"]);
         Route::get('book/return-book/{bookId}', [BookService::class, "returnBook"]);
         Route::post('book/submit-review', [BookService::class, "submitReview"]);
+        Route::get('book/save-to-collection/{bookId}', [BookService::class, "saveToCollection"]);
     });
 
     // Admin or petugas middleware

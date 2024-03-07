@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookCollection;
 use App\Models\Buku;
 use App\Models\Peminjaman;
 use App\Models\Review;
@@ -97,5 +98,24 @@ class BookController extends Controller
             'borrowedBooks' => $borrowedBooks
         ]);
 
+    }
+
+    public function collection() {
+        // gets user
+        $user = auth()->user();
+
+        // gets collections by user id
+        $collection = BookCollection::with(['book'])->where('UserId', $user->UserId)->get()->map(function($item) {
+            if(!empty($item->book->filename)) {
+                $item->book->cover = Storage::url($item->book->filename);
+            }
+            return $item->book;
+        });
+
+        // renders
+        return Inertia::render('Home/BookCollectionsPage', [
+            'user' => $user,
+            'collection' => $collection
+        ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReviewRequest;
+use App\Models\BookCollection;
 use App\Models\Buku;
 use App\Models\Peminjaman;
 use App\Models\Review;
@@ -141,6 +142,52 @@ class BookService extends Controller
             return response()->json([
                 'status' => false,
                 'text' => 'Gagal buat review; sesuatu terjadi!'
+            ]);
+        }
+    }
+
+    public function saveToCollection($bookId) {
+        // gets book
+        $book = Buku::where('BukuId', $bookId)->first();
+
+        // ensure book exists
+        if(empty($book)) {
+            return response()->json([
+                "status"  => false,
+                "text" => "Buku tidak ada!"
+            ]);
+        }
+
+        // gets existing book in collection by userId
+        $existingBook = BookCollection::where('UserId', Auth::user()->UserId)
+            ->where('BukuId', $bookId)
+            ->first();
+
+        // aborts if exist
+        if(!empty($existingBook)) {
+            return response()->json([
+                "status" => false,
+                "text" => "Buku sudah ada di koleksi!"
+            ]);
+        }
+
+        // adds to collection
+        $result = (new BookCollection([
+            "UserId" => Auth::user()->UserId,
+            "BukuId" => $bookId,
+        ]))->save();
+
+        // returns
+        if($result) {
+            return response()->json([
+                "status" => true,
+                "text" => "Berhasil menambahkan ke koleksi!"
+            ]);
+        }
+        else {
+            return response()->json([
+                "status" => false,
+                "text" => "Gagal menambahkan ke koleksi; sesuatu terjadi!"
             ]);
         }
     }

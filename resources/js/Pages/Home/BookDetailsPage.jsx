@@ -119,7 +119,56 @@ export default function BookDetailPage({user, book, borrow, reviews}) {
 
     // 
     const handleReviewSubmitSuccess = (review) => {
-        
+        // 
+        const newReview = [...currentReviews];
+        newReview.push(review);
+
+        setCurrentReviews(newReview);
+    }
+
+    // 
+    const handleSaveToCollection = () => {
+        // gets baseurl
+        const baseUrl = import.meta.env.VITE_BASE_URL;
+
+        // init swal
+        const MySwal = withReactContent(Swal);
+
+        // shows loading
+        MySwal.fire({
+            didOpen: () => {
+                MySwal.showLoading();
+            }  
+        })
+
+        // request
+        axios.get(`${baseUrl}/api/book/save-to-collection/${book.BukuId}`, {
+            headers: {
+                Accept: 'application/json'
+            }
+        }).then(response => {
+            // handles
+            if(response.data.status) {
+                MySwal.fire({
+                    icon:'success',
+                    title: "Berhasil",
+                    html: response.data.text
+                })
+            }
+            else {
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    html: response.data.text
+                })
+            }
+        }).catch(ex => {
+            MySwal.fire({
+                icon:'error',
+                title: 'Gagal',
+                text: ex
+            })
+        })
     }
 
     // returns
@@ -162,13 +211,14 @@ export default function BookDetailPage({user, book, borrow, reviews}) {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center mt-5">
+                <div className="flex gap-2 justify-center mt-5">
                     {
                         isBorrowed ?
                             <PrimaryButton className={"!bg-purple-800"} onClick={handleReturnBook} text="Kembalikan Buku"/>
                         :
                             <PrimaryButton onClick={handleBorrowBook} text="Pinjam Buku"/>
                     }
+                    <PrimaryButton className={"!bg-green-800"} onClick={handleSaveToCollection} text="Tambahkan Ke Koleksi"/>
                 </div>
             </div>
             <div className="mt-5">
