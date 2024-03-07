@@ -183,7 +183,7 @@ export default function BookDetailPage({user, book, borrow, reviews}) {
                         <h4 className="text-[#818181] text-lg font-light">{book.Penulis }</h4>
                         <h3 className="text-2xl text-black font-light">{book.Judul}</h3>
                         <h5 className="mt-4 text-lg">Deskripsi</h5>
-                        <p className="mt-3 font-light">{book.Sinopsis}</p>
+                        <p className="mt-3 font-light whitespace-pre-line">{book.Sinopsis}</p>
                         <div className="mt-3">
                             <h5 className="mt-4 text-lg">Detail Buku</h5>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
